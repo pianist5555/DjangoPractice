@@ -13,7 +13,7 @@ def detail(request, question_id): # URL pattern에서 정규표현식으로 추�
     return render(request, 'polls/detail.html', {'question': question}) 
 
 def vote(request, question_id):
-    question = get_object_or_404(Question, pk=question_id) # 숏컷을 사용하여 Question 모델 클래스부터 pk=question_pk를 검색 조건에 맞는 객체를 조회, 없으면 http404 익셉션 레이즈
+    question = get_object_or_404(Question, pk=question_id) # 숏컷을 사용하여 Question 모델 클래스부터 pk=question_id를 검색 조건에 맞는 객체를 조회, 없으면 http404 익셉션 레이즈
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice']) # request.POST = html에서 제출된 form 을 담은 데이터 객체 . form에서 키가 choice에 해당하는 값
     except (KeyError, Choice.DoseNotExist): # 에러 발생시 detail.html으로 erorr_message와 question을 딕셔너리에 담아 전달
